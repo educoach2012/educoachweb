@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/site-footer'
 import { StickyActions } from '@/components/sticky-actions'
 import { getSiteSettings, getCountries } from '@/lib/data'
 import { urlFor } from '@/sanity/lib/image'
+import { contact } from '@/lib/site-data'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [settings, countries] = await Promise.all([
@@ -10,9 +11,16 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     getCountries(),
   ])
 
-  const whatsappHref = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(settings.whatsappMessage)}`
-  const logoUrl = settings.logo ? urlFor(settings.logo).height(72).url() : undefined
-  const logoDarkUrl = settings.logoDark ? urlFor(settings.logoDark).height(72).url() : undefined
+  const phone = settings?.phone ?? contact.phone
+  const phoneHref = settings?.phoneHref ?? contact.phoneHref
+  const whatsapp = settings?.whatsapp ?? contact.whatsapp
+  const whatsappMsg = settings?.whatsappMessage ?? contact.whatsappMessage
+  const email = settings?.email ?? contact.email
+  const address = settings?.address ?? contact.address
+
+  const whatsappHref = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMsg)}`
+  const logoUrl = settings?.logo ? urlFor(settings.logo).height(72).url() : undefined
+  const logoDarkUrl = settings?.logoDark ? urlFor(settings.logoDark).height(72).url() : undefined
 
   return (
     <>
@@ -23,10 +31,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <main id="main-content" className="pb-20 md:pb-0">{children}</main>
       <SiteFooter
         contact={{
-          phone: settings.phone,
-          phoneHref: settings.phoneHref,
-          email: settings.email,
-          address: settings.address,
+          phone,
+          phoneHref,
+          email,
+          address,
         }}
         whatsappHref={whatsappHref}
         countries={countries}
@@ -34,7 +42,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         logoDarkUrl={logoDarkUrl}
       />
       <StickyActions
-        phoneHref={settings.phoneHref}
+        phoneHref={phoneHref}
         whatsappHref={whatsappHref}
       />
     </>
