@@ -26,8 +26,8 @@ async function sanityFetch<T>(query: string, params?: Record<string, unknown>): 
   return client.fetch<T>(query, params ?? {}, fetchOptions)
 }
 
-export async function getSiteSettings(): Promise<SiteSettings> {
-  if (useCms) return sanityFetch<SiteSettings>(queries.siteSettingsQuery)
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  if (useCms) return sanityFetch<SiteSettings | null>(queries.siteSettingsQuery)
   return {
     companyName: 'EduCoach Services',
     phone: siteData.contact.phone,
