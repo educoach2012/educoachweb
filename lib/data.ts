@@ -26,29 +26,34 @@ async function sanityFetch<T>(query: string, params?: Record<string, unknown>): 
   return client.fetch<T>(query, params ?? {}, fetchOptions)
 }
 
+const fallbackSettings: SiteSettings = {
+  companyName: 'EduCoach Services',
+  phone: siteData.contact.phone,
+  phoneHref: siteData.contact.phoneHref,
+  whatsapp: siteData.contact.whatsapp,
+  whatsappMessage: siteData.contact.whatsappMessage,
+  email: siteData.contact.email,
+  address: siteData.contact.address,
+  stats: siteData.stats,
+  mission: siteData.aboutContent.mission,
+  vision: siteData.aboutContent.vision,
+  foundedYear: siteData.aboutContent.foundedYear,
+  story: siteData.aboutContent.story,
+  values: siteData.aboutContent.values,
+  assessmentFormUrl: null,
+  notificationEmail: null,
+}
+
 export async function getSiteSettings(): Promise<SiteSettings> {
-  if (useCms) return sanityFetch<SiteSettings>(queries.siteSettingsQuery)
-  return {
-    companyName: 'EduCoach Services',
-    phone: siteData.contact.phone,
-    phoneHref: siteData.contact.phoneHref,
-    whatsapp: siteData.contact.whatsapp,
-    whatsappMessage: siteData.contact.whatsappMessage,
-    email: siteData.contact.email,
-    address: siteData.contact.address,
-    stats: siteData.stats,
-    mission: siteData.aboutContent.mission,
-    vision: siteData.aboutContent.vision,
-    foundedYear: siteData.aboutContent.foundedYear,
-    story: siteData.aboutContent.story,
-    values: siteData.aboutContent.values,
-    assessmentFormUrl: null,
-    notificationEmail: null,
+  if (useCms) {
+    const result = await sanityFetch<SiteSettings | null>(queries.siteSettingsQuery)
+    return result ?? fallbackSettings
   }
+  return fallbackSettings
 }
 
 export async function getCountries(): Promise<Country[]> {
-  if (useCms) return sanityFetch<Country[]>(queries.countriesQuery)
+  if (useCms) return (await sanityFetch<Country[] | null>(queries.countriesQuery)) ?? []
   return siteData.countries.map((c, i) => ({
     ...c,
     universityCount: c.universities,
@@ -65,12 +70,12 @@ export async function getCountryBySlug(slug: string): Promise<CountryDetail | nu
 }
 
 export async function getServices(): Promise<Service[]> {
-  if (useCms) return sanityFetch<Service[]>(queries.servicesQuery)
+  if (useCms) return (await sanityFetch<Service[] | null>(queries.servicesQuery)) ?? []
   return siteData.services.map((s, i) => ({ ...s, serviceId: s.id, shortDesc: s.desc, order: i }))
 }
 
 export async function getBlogs(): Promise<Blog[]> {
-  if (useCms) return sanityFetch<Blog[]>(queries.blogsQuery)
+  if (useCms) return (await sanityFetch<Blog[] | null>(queries.blogsQuery)) ?? []
   return siteData.blogs.map((b) => ({ ...b, readingTime: b.minutes }))
 }
 
@@ -89,42 +94,42 @@ export async function getBlogBySlug(slug: string): Promise<BlogDetail | null> {
 }
 
 export async function getSuccessStories(): Promise<SuccessStory[]> {
-  if (useCms) return sanityFetch<SuccessStory[]>(queries.successStoriesQuery)
+  if (useCms) return (await sanityFetch<SuccessStory[] | null>(queries.successStoriesQuery)) ?? []
   return siteData.successStories.map((s) => ({ ...s, countryName: s.country }))
 }
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
-  if (useCms) return sanityFetch<TeamMember[]>(queries.teamMembersQuery)
+  if (useCms) return (await sanityFetch<TeamMember[] | null>(queries.teamMembersQuery)) ?? []
   return siteData.experts.map((e, i) => ({ ...e, order: i }))
 }
 
 export async function getEvents(): Promise<Event[]> {
-  if (useCms) return sanityFetch<Event[]>(queries.eventsQuery)
+  if (useCms) return (await sanityFetch<Event[] | null>(queries.eventsQuery)) ?? []
   return siteData.events
 }
 
 export async function getUniversities(): Promise<University[]> {
-  if (useCms) return sanityFetch<University[]>(queries.universitiesQuery)
+  if (useCms) return (await sanityFetch<University[] | null>(queries.universitiesQuery)) ?? []
   return siteData.universities.map((u) => ({ ...u, countryName: u.country }))
 }
 
 export async function getFaqs(): Promise<Faq[]> {
-  if (useCms) return sanityFetch<Faq[]>(queries.faqsQuery)
+  if (useCms) return (await sanityFetch<Faq[] | null>(queries.faqsQuery)) ?? []
   return siteData.faqs.map((f) => ({ question: f.q, answer: f.a }))
 }
 
 export async function getResources(): Promise<Resource[]> {
-  if (useCms) return sanityFetch<Resource[]>(queries.resourcesQuery)
+  if (useCms) return (await sanityFetch<Resource[] | null>(queries.resourcesQuery)) ?? []
   return siteData.resources.map((r) => ({ ...r, description: r.desc }))
 }
 
 export async function getSteps(): Promise<Step[]> {
-  if (useCms) return sanityFetch<Step[]>(queries.stepsQuery)
+  if (useCms) return (await sanityFetch<Step[] | null>(queries.stepsQuery)) ?? []
   return siteData.steps.map((s, i) => ({ ...s, shortDesc: s.desc, order: i + 1 }))
 }
 
 export async function getStoriesByCountry(slug: string): Promise<SuccessStory[]> {
-  if (useCms) return sanityFetch<SuccessStory[]>(queries.storiesByCountryQuery, { slug })
+  if (useCms) return (await sanityFetch<SuccessStory[] | null>(queries.storiesByCountryQuery, { slug })) ?? []
   return siteData.successStories
     .filter((s) => s.country.toLowerCase().replace(/\s+/g, '-') === slug)
     .map((s) => ({ ...s, countryName: s.country }))
