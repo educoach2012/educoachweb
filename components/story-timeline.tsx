@@ -10,40 +10,40 @@ type Milestone = {
 
 const milestones: Milestone[] = [
   {
-    year: '2012',
+    year: '2013',
     title: 'The Beginning',
     description:
-      'Founded with a simple belief — every student deserves counselling that starts with who they are, not which college ranks highest. Our first office opened with just two counsellors and a handful of families who trusted a new approach.',
+      'Dr. Priya Menon founded EduCoach Services in Bengaluru with a simple conviction: every student deserves counselling that starts with who they are, not which college ranks highest. The first office opened with two counsellors and a handful of families who believed in a new, science-backed approach to study-abroad guidance.',
   },
   {
-    year: '2014',
+    year: '2015',
     title: 'Psycho-Aptitude Analysis Launched',
     description:
-      'Developed our signature methodology combining psychometric science with admissions expertise. The first cohort of students guided through this framework secured offers from universities across 8 countries.',
+      'Drawing on her UCL research in Education Psychology, Dr. Menon formalised EduCoach\'s signature methodology — combining validated psychometric instruments with admissions expertise. The first cohort guided through this framework secured offers from universities across 8 countries, with over ₹1.5Cr in scholarships.',
   },
   {
-    year: '2016',
+    year: '2017',
     title: '500 Students Milestone',
     description:
-      'Crossed 500 successful placements. Expanded the team to include country-specific specialists for the UK, US, Canada, and Australia. Opened partnerships with 100+ universities worldwide.',
+      'Crossed 500 successful placements. Expanded the team to include country-specific specialists for the UK, US, Canada, and Australia. Established partnerships with 100+ universities worldwide and launched a dedicated scholarship research desk.',
   },
   {
-    year: '2019',
-    title: 'Scholarship Breakthrough',
+    year: '2020',
+    title: 'Adapting Through Adversity',
     description:
-      'Crossed ₹50Cr in cumulative scholarships secured for our students. Launched dedicated scholarship research and application support as a core service offering.',
+      'When the pandemic disrupted global education, EduCoach pivoted to fully virtual counselling and helped students navigate deferred intakes, changed visa policies, and online learning transitions. Not a single student was left without a clear plan.',
   },
   {
     year: '2022',
-    title: '2,000+ Students Placed',
+    title: '2,000 Students & ₹80Cr in Scholarships',
     description:
-      'Reached the 2,000-student milestone with placements across 30+ countries. Introduced postgraduate and career-transition counselling tracks alongside our flagship undergraduate programme.',
+      'Reached the 2,000-student milestone with placements across 30+ countries. Launched dedicated postgraduate and career-transition counselling tracks. Crossed ₹80Cr in cumulative scholarships secured for students.',
   },
   {
     year: '2025',
     title: 'The Next Chapter',
     description:
-      'Launched our digital platform with CMS-powered content, events hub, and resources library. Expanded to ₹120Cr+ in total scholarships and 2,500+ students guided. The mission continues.',
+      'Surpassed 2,500 students guided and ₹120Cr in total scholarships. Launched the digital platform with a resources library, events hub, and CMS-managed content. Introduced three structured programmes — JumpStart, Sprint, and Career Pivot — to serve students at every life stage.',
   },
 ]
 
