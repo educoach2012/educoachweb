@@ -128,6 +128,46 @@ export default defineType({
       type: 'string',
       description: 'Email address that receives contact and newsletter form submissions',
     }),
+    defineField({
+      name: 'gtmId',
+      title: 'Google Tag Manager ID',
+      type: 'string',
+      description: 'Container ID (e.g. GTM-XXXXXXX)',
+      group: 'analytics',
+    }),
+    defineField({
+      name: 'ga4Id',
+      title: 'Google Analytics 4 Measurement ID',
+      type: 'string',
+      description: 'Measurement ID (e.g. G-XXXXXXXXXX)',
+      group: 'analytics',
+    }),
+    defineField({
+      name: 'seoTitle',
+      title: 'Default SEO Title',
+      type: 'string',
+      description: 'Fallback title for pages without their own. Keep under 60 characters.',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'Default SEO Description',
+      type: 'text',
+      rows: 3,
+      description: 'Fallback meta description for pages without their own. Keep under 160 characters.',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'seoImage',
+      title: 'Default OG Image',
+      type: 'image',
+      description: 'Fallback social sharing image (1200x630 recommended)',
+      group: 'seo',
+    }),
+  ],
+  groups: [
+    { name: 'analytics', title: 'Analytics & Tracking' },
+    { name: 'seo', title: 'SEO Defaults' },
   ],
   preview: {
     prepare() {

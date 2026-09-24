@@ -10,6 +10,7 @@ import { Experts } from '@/components/home/experts'
 import { EventsSection } from '@/components/home/events-section'
 import { BlogsSection } from '@/components/home/blogs-section'
 import { FaqSection } from '@/components/home/faq-section'
+import { FounderSpotlight } from '@/components/home/founder-spotlight'
 import {
   getSiteSettings,
   getCountries,
@@ -66,9 +67,10 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <Hero countries={countries} />
+      <Hero countries={countries} stats={settings.stats} />
       <TrustBar stats={settings.stats} />
       <WhyEduCoach whyCards={whyCards} />
+      <FounderSpotlight />
       <HowWeWork steps={steps} />
       <SuccessStories stories={stories} />
       <Destinations countries={countries} />

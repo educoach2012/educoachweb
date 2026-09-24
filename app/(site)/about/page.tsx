@@ -4,6 +4,7 @@ import { SectionHeading } from '@/components/section-heading'
 import { Reveal, RevealStagger, RevealItem } from '@/components/reveal'
 import { AnimatedCounter } from '@/components/animated-counter'
 import { CTABand } from '@/components/cta-band'
+import { StoryTimeline } from '@/components/story-timeline'
 import { getSiteSettings, getTeamMembers } from '@/lib/data'
 import { MapPin } from 'lucide-react'
 import { CtaButton } from '@/components/cta-button'
@@ -67,19 +68,16 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Our Story */}
+      {/* Our Story — Timeline */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeading
-            eyebrow="Our Story"
+            eyebrow="Our Journey"
             title="From a small office to India's trusted counselling partner"
+            description="A decade of guiding students to the world's best universities."
           />
-          <div className="mx-auto mt-12 max-w-3xl space-y-6">
-            {settings.story.map((paragraph, i) => (
-              <Reveal key={i} delay={i * 0.08}>
-                <p className="text-base leading-relaxed text-muted-foreground">{paragraph}</p>
-              </Reveal>
-            ))}
+          <div className="mt-14">
+            <StoryTimeline />
           </div>
         </div>
       </section>

@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const blog = await getBlogBySlug(slug)
   if (!blog) return {}
   return {
-    title: blog.title,
-    description: `${blog.title} — expert advice from EduCoach Services on ${blog.category.toLowerCase()}.`,
+    title: blog.seoTitle ?? blog.title,
+    description: blog.seoDescription ?? `${blog.title} — expert advice from EduCoach Services on ${blog.category.toLowerCase()}.`,
   }
 }
 

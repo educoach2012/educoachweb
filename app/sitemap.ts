@@ -20,6 +20,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/resources`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${siteUrl}/contact`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${siteUrl}/book-assessment`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${siteUrl}/methodology`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/services/undergraduate`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/services/postgraduate`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/programmes/jumpstart`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/programmes/sprint`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/programmes/career-pivot`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/case-studies`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${siteUrl}/acceptances`, changeFrequency: 'weekly', priority: 0.8 },
   ]
 
   const countryRoutes: MetadataRoute.Sitemap = countries.map((c) => ({

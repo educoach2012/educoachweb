@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const country = await getCountryBySlug(slug)
   if (!country) return {}
   return {
-    title: `Study in ${country.name}`,
-    description: `Explore studying in ${country.name} with EduCoach — ${country.tagline}. Top universities, scholarships, visa guidance and more.`,
+    title: country.seoTitle ?? `Study in ${country.name}`,
+    description: country.seoDescription ?? `Explore studying in ${country.name} with EduCoach — ${country.tagline}. Top universities, scholarships, visa guidance and more.`,
   }
 }
 

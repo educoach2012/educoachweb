@@ -8,7 +8,8 @@ export const countriesQuery = groq`*[_type == "country"] | order(order asc) {
 
 export const countryBySlugQuery = groq`*[_type == "country" && slug.current == $slug][0] {
   _id, name, "slug": slug.current, flag, tagline, universityCount,
-  overview, whyStudyHere, topUniversities, intakes, averageCost, visaInfo
+  overview, whyStudyHere, topUniversities, intakes, averageCost, visaInfo,
+  seoTitle, seoDescription
 }`
 
 export const servicesQuery = groq`*[_type == "service"] | order(order asc) {
@@ -22,7 +23,8 @@ export const blogsQuery = groq`*[_type == "blog"] | order(publishedDate desc) {
 
 export const blogBySlugQuery = groq`*[_type == "blog" && slug.current == $slug][0] {
   _id, title, "slug": slug.current, category, readingTime, publishedDate,
-  heroImage, body, "author": author->{name, role, photo}
+  heroImage, body, "author": author->{name, role, photo},
+  seoTitle, seoDescription
 }`
 
 export const successStoriesQuery = groq`*[_type == "successStory"] | order(year desc) {
@@ -58,4 +60,17 @@ export const stepsQuery = groq`*[_type == "step"] | order(order asc) {
 export const storiesByCountryQuery = groq`*[_type == "successStory" && country->slug.current == $slug] | order(year desc) {
   _id, name, university, "countryName": coalesce(country->name, countryName),
   course, scholarship, year, quote
+}`
+
+export const caseStudiesQuery = groq`*[_type == "caseStudy"] | order(order asc) {
+  _id, title, "slug": slug.current, studentName, university,
+  "countryName": coalesce(country->name, ""),
+  course, level, scholarshipValue, year,
+  challenge, approach, outcome, quote, photo, featured
+}`
+
+export const acceptancesQuery = groq`*[_type == "acceptance"] | order(year desc) {
+  _id, studentName, university,
+  "countryName": coalesce(country->name, countryName),
+  course, level, scholarship, year, photo
 }`

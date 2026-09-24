@@ -9,6 +9,8 @@ import university from './university'
 import faq from './faq'
 import resource from './resource'
 import step from './step'
+import caseStudy from './caseStudy'
+import acceptance from './acceptance'
 
 export const schemaTypes = [
   siteSettings,
@@ -22,4 +24,6 @@ export const schemaTypes = [
   faq,
   resource,
   step,
+  caseStudy,
+  acceptance,
 ]

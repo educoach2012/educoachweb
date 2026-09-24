@@ -16,6 +16,8 @@ import type {
   Faq,
   Resource,
   Step,
+  CaseStudy,
+  Acceptance,
 } from './types'
 
 const useCms = !!projectId
@@ -42,6 +44,11 @@ const fallbackSettings: SiteSettings = {
   values: siteData.aboutContent.values,
   assessmentFormUrl: null,
   notificationEmail: null,
+  gtmId: null,
+  ga4Id: null,
+  seoTitle: null,
+  seoDescription: null,
+  seoImage: null,
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -126,6 +133,86 @@ export async function getResources(): Promise<Resource[]> {
 export async function getSteps(): Promise<Step[]> {
   if (useCms) return (await sanityFetch<Step[] | null>(queries.stepsQuery)) ?? []
   return siteData.steps.map((s, i) => ({ ...s, shortDesc: s.desc, order: i + 1 }))
+}
+
+const dummyCaseStudies: CaseStudy[] = [
+  {
+    title: 'How we helped Priya secure a full scholarship at LSE',
+    slug: 'priya-lse-scholarship',
+    studentName: 'Priya Sharma',
+    university: 'London School of Economics',
+    countryName: 'United Kingdom',
+    course: 'MSc Economics',
+    level: 'Postgraduate',
+    scholarshipValue: '£45,000 (Full tuition)',
+    year: 2025,
+    challenge: 'Priya had strong academics but a thin extracurricular profile. She had applied independently the previous year and was rejected from her top 3 choices. Her confidence was low and she was considering settling for a less competitive programme.',
+    approach: 'We started with a psychometric assessment that revealed strong analytical and leadership aptitudes. Over 8 months, we helped Priya build a research portfolio — including a published paper on behavioural economics — redesigned her SOP to tell a compelling narrative, and prepped her for LSE\'s interview.',
+    outcome: 'Priya received offers from LSE, UCL, and Warwick — all with scholarship offers. She chose LSE with a full-tuition scholarship worth £45,000.',
+    quote: 'EduCoach didn\'t just fix my application — they helped me see what I was capable of.',
+    featured: true,
+  },
+  {
+    title: 'From average scores to Stanford — Arjun\'s transformation',
+    slug: 'arjun-stanford-journey',
+    studentName: 'Arjun Mehta',
+    university: 'Stanford University',
+    countryName: 'United States',
+    course: 'BS Computer Science',
+    level: 'Undergraduate',
+    scholarshipValue: '$50,000/year',
+    year: 2025,
+    challenge: 'Arjun was a bright student but his board exam scores were average (88%). He had no olympiad medals and his extracurriculars were generic. His parents were sceptical that top US universities were realistic.',
+    approach: 'Starting in Class 10, we built a 2-year profile roadmap. Arjun developed an open-source accessibility tool that gained 2,000+ GitHub stars, interned at a startup, and led his school\'s coding club. His Common App essay told the story of building tech for his visually impaired grandmother.',
+    outcome: 'Arjun was admitted to Stanford, MIT, and Georgia Tech. Stanford offered $50,000/year in financial aid. His GitHub project was specifically mentioned by the admissions committee.',
+    quote: 'They saw something in me that I hadn\'t seen in myself. Two years later, I\'m at Stanford.',
+    featured: true,
+  },
+  {
+    title: 'Meera\'s path to University of Toronto with PR pathway',
+    slug: 'meera-toronto-pr',
+    studentName: 'Meera Iyer',
+    university: 'University of Toronto',
+    countryName: 'Canada',
+    course: 'MSc Biotechnology',
+    level: 'Postgraduate',
+    scholarshipValue: 'CA$25,000',
+    year: 2024,
+    challenge: 'Meera wanted a programme that would lead to permanent residency in Canada, but she was confused by the immigration pathways and had applied to programmes that didn\'t qualify for PGWP.',
+    approach: 'We mapped her academic interests against PR-eligible programmes, shortlisted universities in provinces with favourable PNP streams, and crafted her SOP around her biotech research experience. We also connected her with an EduCoach alum in Toronto for mentorship.',
+    outcome: 'Meera was admitted to UofT with a CA$25,000 scholarship. She\'s now on track for PR through the Ontario PNP stream after graduation.',
+    quote: 'EduCoach understood that my goal wasn\'t just a degree — it was a life in Canada. They planned for both.',
+    featured: false,
+  },
+]
+
+const dummyAcceptances: Acceptance[] = [
+  { studentName: 'Ananya Sharma', university: 'University of Oxford', countryName: 'United Kingdom', course: 'PPE', level: 'Undergraduate', scholarship: '£25,000', year: 2025 },
+  { studentName: 'Rohan Mehta', university: 'Stanford University', countryName: 'United States', course: 'Computer Science', level: 'Undergraduate', scholarship: '$40,000/year', year: 2025 },
+  { studentName: 'Ishita Nair', university: 'University of Toronto', countryName: 'Canada', course: 'Biotechnology', level: 'Postgraduate', scholarship: 'CA$18,000', year: 2024 },
+  { studentName: 'Kabir Singh', university: 'University of Melbourne', countryName: 'Australia', course: 'Data Science', level: 'Postgraduate', scholarship: 'AU$20,000', year: 2024 },
+  { studentName: 'Meera Iyer', university: 'National University of Singapore', countryName: 'Singapore', course: 'Business Analytics', level: 'Postgraduate', scholarship: 'S$15,000', year: 2025 },
+  { studentName: 'Arjun Rao', university: 'TU Munich', countryName: 'Europe', course: 'Mechanical Engineering', level: 'Postgraduate', scholarship: 'Full tuition', year: 2024 },
+  { studentName: 'Sneha Patel', university: 'Imperial College London', countryName: 'United Kingdom', course: 'Biomedical Engineering', level: 'Postgraduate', scholarship: '£15,000', year: 2025 },
+  { studentName: 'Vikram Desai', university: 'Columbia University', countryName: 'United States', course: 'MBA', level: 'MBA', scholarship: '$30,000', year: 2025 },
+  { studentName: 'Riya Gupta', university: 'McGill University', countryName: 'Canada', course: 'Psychology', level: 'Undergraduate', year: 2024 },
+  { studentName: 'Aditya Joshi', university: 'University of Sydney', countryName: 'Australia', course: 'Finance', level: 'Postgraduate', scholarship: 'AU$10,000', year: 2025 },
+  { studentName: 'Nandini Reddy', university: 'ETH Zurich', countryName: 'Europe', course: 'Computer Science', level: 'Postgraduate', scholarship: 'Full tuition', year: 2024 },
+  { studentName: 'Karan Malhotra', university: 'NYU Abu Dhabi', countryName: 'UAE', course: 'Economics', level: 'Undergraduate', scholarship: 'Full scholarship', year: 2025 },
+  { studentName: 'Tanya Bhatia', university: 'University of Cambridge', countryName: 'United Kingdom', course: 'Natural Sciences', level: 'Undergraduate', year: 2025 },
+  { studentName: 'Rahul Khanna', university: 'University of British Columbia', countryName: 'Canada', course: 'Civil Engineering', level: 'Postgraduate', scholarship: 'CA$12,000', year: 2024 },
+  { studentName: 'Pooja Nair', university: 'Harvard University', countryName: 'United States', course: 'Public Health', level: 'Postgraduate', scholarship: '$35,000', year: 2025 },
+  { studentName: 'Aman Trivedi', university: 'NTU Singapore', countryName: 'Singapore', course: 'Electrical Engineering', level: 'Postgraduate', scholarship: 'S$20,000', year: 2024 },
+]
+
+export async function getCaseStudies(): Promise<CaseStudy[]> {
+  if (useCms) return (await sanityFetch<CaseStudy[] | null>(queries.caseStudiesQuery)) ?? []
+  return dummyCaseStudies
+}
+
+export async function getAcceptances(): Promise<Acceptance[]> {
+  if (useCms) return (await sanityFetch<Acceptance[] | null>(queries.acceptancesQuery)) ?? []
+  return dummyAcceptances
 }
 
 export async function getStoriesByCountry(slug: string): Promise<SuccessStory[]> {

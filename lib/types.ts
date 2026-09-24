@@ -20,6 +20,11 @@ export type SiteSettings = {
   notificationEmail: string | null
   logo?: SanityImageRef
   logoDark?: SanityImageRef
+  gtmId?: string | null
+  ga4Id?: string | null
+  seoTitle?: string | null
+  seoDescription?: string | null
+  seoImage?: SanityImageRef | null
 }
 
 export type Country = {
@@ -32,6 +37,8 @@ export type Country = {
 }
 
 export type CountryDetail = Country & {
+  seoTitle?: string | null
+  seoDescription?: string | null
   overview?: string
   whyStudyHere?: string[]
   topUniversities?: { name: string; ranking: string; city: string }[]
@@ -61,6 +68,8 @@ export type Blog = {
 }
 
 export type BlogDetail = Blog & {
+  seoTitle?: string | null
+  seoDescription?: string | null
   body: unknown[]
   author: { name: string; role: string } | null
   heroImage?: string
@@ -120,4 +129,33 @@ export type Step = {
   shortDesc: string
   longDesc?: string
   order: number
+}
+
+export type CaseStudy = {
+  title: string
+  slug: string
+  studentName: string
+  university: string
+  countryName: string
+  course: string
+  level: string
+  scholarshipValue?: string
+  year: number
+  challenge: string
+  approach: string
+  outcome: string
+  quote?: string
+  photo?: SanityImageRef
+  featured?: boolean
+}
+
+export type Acceptance = {
+  studentName: string
+  university: string
+  countryName: string
+  course: string
+  level: string
+  scholarship?: string
+  year: number
+  photo?: SanityImageRef
 }

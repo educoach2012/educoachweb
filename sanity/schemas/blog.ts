@@ -29,6 +29,11 @@ export default defineType({
       ],
     }),
     defineField({ name: 'featured', title: 'Featured', type: 'boolean', initialValue: false }),
+    defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string', description: 'Override for search engines. Keep under 60 characters.', group: 'seo' }),
+    defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3, description: 'Override meta description. Keep under 160 characters.', group: 'seo' }),
+  ],
+  groups: [
+    { name: 'seo', title: 'SEO' },
   ],
   orderings: [{ title: 'Published', name: 'published', by: [{ field: 'publishedDate', direction: 'desc' }] }],
   preview: {

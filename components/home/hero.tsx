@@ -7,9 +7,11 @@ import { CtaButton } from '@/components/cta-button'
 
 interface HeroProps {
   countries: { name: string; slug: string; flag: string }[]
+  stats?: { value: number; suffix: string; label: string }[]
 }
 
-export function Hero({ countries }: HeroProps) {
+export function Hero({ countries, stats }: HeroProps) {
+  const heroStat = stats?.[0]
   return (
     <section className="relative overflow-hidden pt-28 sm:pt-32">
       <div
@@ -65,11 +67,25 @@ export function Hero({ countries }: HeroProps) {
             discovery to admission offers and visas — we guide you every step of the way.
           </motion.p>
 
+          {heroStat && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 inline-flex items-center gap-3 rounded-2xl border border-gold/30 bg-gold/5 px-5 py-3"
+            >
+              <span className="font-display text-3xl font-bold text-gold sm:text-4xl">
+                {heroStat.value.toLocaleString()}{heroStat.suffix}
+              </span>
+              <span className="text-sm font-medium text-muted-foreground">{heroStat.label}</span>
+            </motion.div>
+          )}
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 flex flex-col gap-3 sm:flex-row"
+            className="mt-6 flex flex-col gap-3 sm:flex-row"
           >
             <CtaButton href="/book-assessment" variant="gold" size="lg">
               Book Your Assessment
@@ -121,25 +137,29 @@ export function Hero({ countries }: HeroProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
           </div>
 
-          {/* floating stat cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="glass absolute -left-4 top-10 hidden rounded-2xl border border-border p-4 shadow-xl sm:-left-8 sm:block"
-          >
-            <p className="text-2xl font-bold text-foreground">1000+</p>
-            <p className="text-xs text-muted-foreground">Admission offers</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.75 }}
-            className="glass absolute -right-3 bottom-10 hidden rounded-2xl border border-border p-4 shadow-xl sm:-right-6 sm:block"
-          >
-            <p className="text-2xl font-bold text-gold">₹120Cr+</p>
-            <p className="text-xs text-muted-foreground">Scholarships won</p>
-          </motion.div>
+          {/* floating stat cards — driven from CMS stats */}
+          {stats?.[0] && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="glass absolute -left-4 top-10 hidden rounded-2xl border border-border p-4 shadow-xl sm:-left-8 sm:block"
+            >
+              <p className="text-2xl font-bold text-foreground">{stats[0].value.toLocaleString()}{stats[0].suffix}</p>
+              <p className="text-xs text-muted-foreground">{stats[0].label}</p>
+            </motion.div>
+          )}
+          {stats?.[1] && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.75 }}
+              className="glass absolute -right-3 bottom-10 hidden rounded-2xl border border-border p-4 shadow-xl sm:-right-6 sm:block"
+            >
+              <p className="text-2xl font-bold text-gold">{stats[1].value.toLocaleString()}{stats[1].suffix}</p>
+              <p className="text-xs text-muted-foreground">{stats[1].label}</p>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>
