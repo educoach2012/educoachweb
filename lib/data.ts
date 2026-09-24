@@ -54,10 +54,18 @@ const fallbackSettings: SiteSettings = {
 export async function getSiteSettings(): Promise<SiteSettings> {
   if (useCms) {
     const result = await sanityFetch<SiteSettings | null>(queries.siteSettingsQuery)
-    return result ?? fallbackSettings
+    if (!result) return fallbackSettings
+    return {
+      ...fallbackSettings,
+      ...result,
+      stats: result.stats ?? fallbackSettings.stats,
+      values: result.values ?? fallbackSettings.values,
+      story: result.story ?? fallbackSettings.story,
+    }
   }
   return fallbackSettings
 }
+
 
 export async function getCountries(): Promise<Country[]> {
   if (useCms) return (await sanityFetch<Country[] | null>(queries.countriesQuery)) ?? []
