@@ -54,3 +54,5 @@ Based on the Crease Design Works audit report (July 2026) and current site state
 | 1.1.0 | 2026-09-24 | Phase 4A: GA4/GTM analytics + CMS-managed SEO fields |
 | 1.2.0 | 2026-09-24 | Phase 4B: Hero stat, founder spotlight, about page timeline |
 | 1.3.0 | 2026-09-24 | Phase 4C: Methodology page, UG/PG pages, life-stage programmes, case studies, acceptances wall |
+| 1.3.1 | 2026-09-24 | Content overhaul: fix founder identity (Dr. Priya Menon/UCL), align timeline to 2013, enrich case studies (5 detailed), expand acceptances (38 entries across 3 years), fix getSiteSettings null-safety for Vercel |
+| 1.4.0 | 2026-09-25 | CMS nav management, 3 logo fields (header/footer/icon), preview buttons on all document types, updated footer links |

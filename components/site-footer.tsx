@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 import { Logo } from '@/components/logo'
 import { CtaButton } from '@/components/cta-button'
 import { NewsletterForm } from '@/components/newsletter-form'
+import type { FooterColumn } from '@/lib/types'
 
 type SiteFooterProps = {
   contact: {
@@ -14,43 +15,48 @@ type SiteFooterProps = {
   whatsappHref: string
   countries: { slug: string; name: string; flag: string }[]
   logoUrl?: string
-  logoDarkUrl?: string
+  footerNav?: FooterColumn[]
 }
 
-const columns = [
+const defaultColumns = [
   {
-    title: 'Company',
+    heading: 'Company',
     links: [
       { title: 'About Us', href: '/about' },
+      { title: 'Our Methodology', href: '/methodology' },
       { title: 'How We Work', href: '/how-we-work' },
       { title: 'Our Team', href: '/team' },
       { title: 'Success Stories', href: '/success-stories' },
+      { title: 'Case Studies', href: '/case-studies' },
       { title: 'Events', href: '/events' },
     ],
   },
   {
-    title: 'Services',
+    heading: 'Services',
     links: [
+      { title: 'UG Admissions', href: '/services/undergraduate' },
+      { title: 'PG Admissions', href: '/services/postgraduate' },
       { title: 'Career Counselling', href: '/services#career' },
       { title: 'Profile Building', href: '/services#profile' },
-      { title: 'UG Admissions', href: '/services#ug' },
-      { title: 'PG Admissions', href: '/services#pg' },
       { title: 'Test Preparation', href: '/services#test' },
+      { title: 'Scholarships', href: '/services#scholarship' },
+      { title: 'Visa Assistance', href: '/services#visa' },
     ],
   },
   {
-    title: 'Resources',
+    heading: 'Resources',
     links: [
       { title: 'Blog', href: '/blogs' },
       { title: 'Universities', href: '/universities' },
+      { title: 'Acceptances', href: '/acceptances' },
       { title: 'Free Guides', href: '/resources' },
-      { title: 'Tools', href: '/resources#tools' },
       { title: 'FAQs', href: '/#faq' },
     ],
   },
 ]
 
-export function SiteFooter({ contact, whatsappHref, countries, logoUrl, logoDarkUrl }: SiteFooterProps) {
+export function SiteFooter({ contact, whatsappHref, countries, logoUrl, footerNav }: SiteFooterProps) {
+  const columns = footerNav && footerNav.length > 0 ? footerNav : defaultColumns
   return (
     <footer className="mt-24 border-t border-border bg-secondary/40">
       {/* Final CTA band */}
@@ -91,7 +97,7 @@ export function SiteFooter({ contact, whatsappHref, countries, logoUrl, logoDark
       <div className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid gap-10 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Logo imageUrl={logoUrl} imageDarkUrl={logoDarkUrl} />
+            <Logo imageUrl={logoUrl} />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Helping students discover the right career, build outstanding profiles, and gain
               admission into the world&apos;s leading universities.
@@ -110,8 +116,8 @@ export function SiteFooter({ contact, whatsappHref, countries, logoUrl, logoDark
           </div>
 
           {columns.map((col) => (
-            <div key={col.title}>
-              <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
+            <div key={col.heading}>
+              <h3 className="text-sm font-semibold text-foreground">{col.heading}</h3>
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.title}>

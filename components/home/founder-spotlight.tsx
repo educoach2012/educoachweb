@@ -14,11 +14,11 @@ export function FounderSpotlight() {
               <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
                 <div className="flex aspect-[3/4] items-center justify-center bg-gradient-to-br from-primary/20 to-navy/30">
                   <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-navy font-display text-5xl font-bold text-primary-foreground">
-                    RK
+                    PM
                   </div>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-card via-card/90 to-transparent p-6 pt-16">
-                  <p className="font-display text-lg font-bold text-foreground">Rajesh Kumar</p>
+                  <p className="font-display text-lg font-bold text-foreground">Dr. Priya Menon</p>
                   <p className="text-sm text-primary">Founder &amp; Lead Counsellor</p>
                 </div>
               </div>
@@ -33,7 +33,7 @@ export function FounderSpotlight() {
               </span>
 
               <h2 className="mt-4 font-display text-3xl font-bold text-foreground sm:text-4xl">
-                A counsellor who&apos;s walked the path himself
+                An education psychologist who turned counselling into a science
               </h2>
 
               <div className="relative mt-6">
@@ -47,19 +47,21 @@ export function FounderSpotlight() {
 
               <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
                 <p>
-                  With over a decade of experience in international education counselling, our founder
-                  built EduCoach on a simple conviction: every student deserves guidance that starts
-                  with who they are, not which college ranks highest.
+                  Dr. Priya Menon founded EduCoach in 2013 after completing her doctorate in Education
+                  Psychology from University College London. She saw a gap in how Indian students were
+                  being guided — too many consultancies focused on form-filling, too few invested in
+                  understanding the student.
                 </p>
                 <p>
-                  Having personally guided 2,500+ students across 30+ countries, he developed the
+                  Having personally mentored over 2,500 students across 30+ countries, she developed the
                   Psycho-Aptitude Analysis methodology that has become EduCoach&apos;s defining approach
-                  — combining psychometric insights with deep admissions expertise.
+                  — combining psychometric science with deep admissions expertise to match every student
+                  to the right course, university, and career path.
                 </p>
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                {['10+ Years in Admissions', 'IIM Alumnus', '30+ Countries', '₹120Cr+ in Scholarships'].map((tag) => (
+                {['13+ Years in Education', 'UCL Doctorate', '30+ Countries', '₹120Cr+ in Scholarships'].map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-sm font-medium text-foreground"

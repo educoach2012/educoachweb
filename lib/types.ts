@@ -2,6 +2,10 @@ export type SanityImageRef = { _type: string; asset: { _ref: string } }
 
 export type Stat = { value: number; suffix: string; label: string }
 
+export type NavChild = { title: string; href: string; desc?: string }
+export type NavItem = { title: string; href: string; children?: NavChild[] }
+export type FooterColumn = { heading: string; links: { title: string; href: string }[] }
+
 export type SiteSettings = {
   companyName: string
   phone: string
@@ -18,8 +22,13 @@ export type SiteSettings = {
   values: { title: string; desc: string }[]
   assessmentFormUrl: string | null
   notificationEmail: string | null
+  headerLogo?: SanityImageRef
+  footerLogo?: SanityImageRef
+  iconLogo?: SanityImageRef
   logo?: SanityImageRef
   logoDark?: SanityImageRef
+  mainNav?: NavItem[]
+  footerNav?: FooterColumn[]
   gtmId?: string | null
   ga4Id?: string | null
   seoTitle?: string | null

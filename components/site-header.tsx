@@ -3,13 +3,20 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ChevronDown, Menu, Search, X, ArrowRight } from 'lucide-react'
-import { navItems } from '@/lib/site-data'
+import { navItems as staticNavItems } from '@/lib/site-data'
+import type { NavItem } from '@/lib/types'
 import { Logo } from '@/components/logo'
 import { CtaButton } from '@/components/cta-button'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { cn } from '@/lib/utils'
 
-export function SiteHeader({ logoUrl, logoDarkUrl }: { logoUrl?: string; logoDarkUrl?: string } = {}) {
+type SiteHeaderProps = {
+  logoUrl?: string
+  navItems?: NavItem[]
+}
+
+export function SiteHeader({ logoUrl, navItems }: SiteHeaderProps) {
+  const items = navItems && navItems.length > 0 ? navItems : staticNavItems
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
@@ -54,12 +61,12 @@ export function SiteHeader({ logoUrl, logoDarkUrl }: { logoUrl?: string; logoDar
           )}
         >
           <Link href="/" className="py-2.5" aria-label="EduCoach Services home">
-            <Logo imageUrl={logoUrl} imageDarkUrl={logoDarkUrl} />
+            <Logo imageUrl={logoUrl} />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-            {navItems.map((item) =>
-              item.children ? (
+            {items.map((item) =>
+              item.children && item.children.length > 0 ? (
                 <div
                   key={item.title}
                   className="relative"
@@ -81,7 +88,7 @@ export function SiteHeader({ logoUrl, logoDarkUrl }: { logoUrl?: string; logoDar
                   </Link>
                   {openMenu === item.title && (
                     <div className="absolute left-1/2 top-full w-[28rem] -translate-x-1/2 xl:w-[34rem] pt-3">
-                      <div className="glass grid grid-cols-2 gap-1 rounded-3xl border border-border p-3 shadow-2xl shadow-primary/10">
+                      <div className="grid grid-cols-2 gap-1 rounded-3xl border border-border bg-card p-3 shadow-2xl shadow-primary/10">
                         {item.children.map((child) => (
                           <Link
                             key={child.title}
@@ -148,7 +155,7 @@ export function SiteHeader({ logoUrl, logoDarkUrl }: { logoUrl?: string; logoDar
           />
           <div className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto bg-card p-5 shadow-2xl">
             <div className="flex items-center justify-between">
-              <Logo imageUrl={logoUrl} imageDarkUrl={logoDarkUrl} />
+              <Logo imageUrl={logoUrl} />
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
@@ -159,7 +166,7 @@ export function SiteHeader({ logoUrl, logoDarkUrl }: { logoUrl?: string; logoDar
               </button>
             </div>
             <nav className="mt-6 flex flex-col gap-1" aria-label="Mobile">
-              {navItems.map((item) => (
+              {items.map((item) => (
                 <div key={item.title} className="border-b border-border/60 py-1">
                   <Link
                     href={item.href}
@@ -168,7 +175,7 @@ export function SiteHeader({ logoUrl, logoDarkUrl }: { logoUrl?: string; logoDar
                   >
                     {item.title}
                   </Link>
-                  {item.children && (
+                  {item.children && item.children.length > 0 && (
                     <div className="mb-2 flex flex-col gap-0.5 pl-3">
                       {item.children.map((child) => (
                         <Link
