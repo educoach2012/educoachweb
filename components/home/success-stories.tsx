@@ -1,13 +1,16 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, GraduationCap, MapPin, Quote } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 import { CtaButton } from '@/components/cta-button'
+import type { SanityImageRef } from '@/lib/types'
+import { urlFor } from '@/sanity/lib/image'
 
 interface SuccessStoriesProps {
-  stories: { name: string; quote: string; course: string; university: string; countryName: string; scholarship: string; year: number }[]
+  stories: { name: string; quote: string; course: string; university: string; countryName: string; scholarship: string; year: number; photo?: SanityImageRef }[]
   title?: string
   description?: string
 }
@@ -64,9 +67,19 @@ export function SuccessStories({ stories, title, description }: SuccessStoriesPr
               </p>
               <div className="mt-6 border-t border-border pt-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary">
-                    {s.name.split(' ').map((n) => n[0]).join('')}
-                  </div>
+                  {s.photo?.asset?._ref ? (
+                    <Image
+                      src={urlFor(s.photo).width(88).height(88).url()}
+                      alt={s.name}
+                      width={44}
+                      height={44}
+                      className="h-11 w-11 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary">
+                      {s.name.split(' ').map((n) => n[0]).join('')}
+                    </div>
+                  )}
                   <div>
                     <p className="font-semibold text-foreground">{s.name}</p>
                     <p className="text-xs text-muted-foreground">{s.course}</p>

@@ -27,6 +27,7 @@ export default async function MethodologyPage() {
         eyebrow={page?.heroEyebrow ?? 'Methodology'}
         title={page?.heroTitle ?? 'Psycho-Aptitude Analysis'}
         description={page?.heroDescription}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Methodology' }]}
       />
 
@@ -85,7 +86,9 @@ export default async function MethodologyPage() {
         </div>
       </section>
 
-      <CTABand />
+      {page?.ctaVisible !== false && (
+        <CTABand title={page?.ctaTitle} subtitle={page?.ctaSubtitle} />
+      )}
     </>
   )
 }

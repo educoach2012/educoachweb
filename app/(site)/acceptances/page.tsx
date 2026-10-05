@@ -31,6 +31,7 @@ export default async function AcceptancesPage() {
         eyebrow={page?.heroEyebrow ?? 'Acceptances'}
         title={page?.heroTitle ?? 'Our students, their universities'}
         description={page?.heroDescription ?? 'Every card represents a real student, a real offer, and a real future — made possible with structured guidance and genuine investment.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Acceptances' }]}
       />
 
@@ -102,7 +103,9 @@ export default async function AcceptancesPage() {
         </div>
       </section>
 
-      <CTABand />
+      {page?.ctaVisible !== false && (
+        <CTABand title={page?.ctaTitle} subtitle={page?.ctaSubtitle} />
+      )}
     </>
   )
 }

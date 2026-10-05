@@ -20,10 +20,10 @@ import type {
   Programme,
 } from './types'
 
-const fetchOptions = { next: { revalidate: 60 } } as const
-
 async function sanityFetch<T>(query: string, params?: Record<string, unknown>): Promise<T> {
-  return client.fetch<T>(query, params ?? {}, fetchOptions)
+  return client.fetch<T>(query, params ?? {}, {
+    next: { revalidate: 60 },
+  })
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {

@@ -27,17 +27,17 @@ export function SiteFooter({ contact, whatsappHref, countries, logoUrl, footerNa
     <footer className="mt-24 border-t border-border bg-secondary/40">
       {/* Final CTA band */}
       <div className="mx-auto max-w-7xl px-4">
-        <div className="relative -mt-12 overflow-hidden rounded-[2rem] bg-primary p-5 text-primary-foreground shadow-2xl shadow-primary/20 sm:p-8 md:p-12">
+        <div className="relative -mt-8 overflow-hidden rounded-[2rem] bg-primary p-4 text-primary-foreground shadow-2xl shadow-primary/20 sm:-mt-12 sm:p-8 md:p-12">
           <div className="relative z-10 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="max-w-xl text-balance text-2xl font-bold sm:text-3xl md:text-4xl">
+              <h2 className="max-w-xl text-pretty text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl">
                 {ctaTitle ?? 'Ready to begin? Book your assessment today.'}
               </h2>
               <p className="mt-3 max-w-lg text-primary-foreground/80">
                 {ctaSubtitle ?? 'One free session to map your right-fit universities, profile plan and next steps.'}
               </p>
             </div>
-            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+            <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
               <CtaButton href="/book-assessment" variant="gold" size="lg">
                 Book Assessment
               </CtaButton>

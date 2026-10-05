@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
 import { PageHero } from '@/components/page-hero'
 import { SectionHeading } from '@/components/section-heading'
-import { Reveal, RevealStagger, RevealItem } from '@/components/reveal'
-import { CtaButton } from '@/components/cta-button'
 import { CTABand } from '@/components/cta-band'
+import { TeamGrid } from '@/components/team-modal'
 import { getTeamMembers, getPageContent } from '@/lib/data'
-import { MapPin } from 'lucide-react'
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageContent('team')
   return {
     title: page?.metaTitle ?? 'Our Team',
-    description: page?.metaDescription ?? 'Meet the EduCoach team — experienced counsellors, essay strategists and visa experts who\'ve guided thousands of students to the world\'s best universities.',
+    description:
+      page?.metaDescription ??
+      "Meet the EduCoach team — experienced counsellors, essay strategists and visa experts who've guided thousands of students to the world's best universities.",
   }
 }
 
@@ -26,7 +26,11 @@ export default async function TeamPage() {
       <PageHero
         eyebrow={page?.heroEyebrow ?? 'Our Team'}
         title={page?.heroTitle ?? "Counsellors who've done this thousands of times"}
-        description={page?.heroDescription ?? 'Seasoned mentors with deep, country-specific expertise and a genuine care for outcomes.'}
+        description={
+          page?.heroDescription ??
+          'Seasoned mentors with deep, country-specific expertise and a genuine care for outcomes.'
+        }
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Team' }]}
       />
 
@@ -38,41 +42,19 @@ export default async function TeamPage() {
             description="Every counsellor at EduCoach has lived the international education experience. They don't just advise — they empathise, strategise and advocate."
           />
 
-          <div className="mt-14 space-y-8">
-            {experts.map((e, i) => (
-              <Reveal key={e.name} delay={i * 0.06}>
-                <div className="grid gap-6 rounded-3xl border border-border bg-card p-6 md:grid-cols-[auto_1fr] md:p-8">
-                  <div className="flex flex-col items-center text-center md:w-56">
-                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary to-navy font-display text-3xl font-bold text-primary-foreground">
-                      {e.name.split(' ').map((n) => n[0]).join('').slice(0, 2)}
-                    </div>
-                    <h3 className="mt-4 text-lg font-semibold text-foreground">{e.name}</h3>
-                    <p className="text-sm text-primary">{e.role}</p>
-                    <div className="mt-3 space-y-1 text-sm text-muted-foreground">
-                      <p>{e.experience} experience</p>
-                      <p className="flex items-center justify-center gap-1.5">
-                        <MapPin className="h-3.5 w-3.5 text-gold" /> {e.countries}
-                      </p>
-                    </div>
-                    <CtaButton href="/book-assessment" variant="gold" className="mt-4 w-full">
-                      Book Session
-                    </CtaButton>
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{e.specialisation}</p>
-                    <p className="mt-3 leading-relaxed text-muted-foreground">{e.bio}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <TeamGrid members={experts} />
         </div>
       </section>
 
-      <CTABand
-        title={page?.ctaTitle ?? 'Want to speak with a counsellor?'}
-        subtitle={page?.ctaSubtitle ?? 'Book a free assessment and get paired with the right expert for your goals.'}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? 'Want to speak with a counsellor?'}
+          subtitle={
+            page?.ctaSubtitle ??
+            'Book a free assessment and get paired with the right expert for your goals.'
+          }
+        />
+      )}
     </>
   )
 }

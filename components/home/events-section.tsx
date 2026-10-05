@@ -5,7 +5,7 @@ import { RevealStagger, RevealItem } from '@/components/reveal'
 import { CtaButton } from '@/components/cta-button'
 
 interface EventsSectionProps {
-  events: { title: string; date: string; city: string; mode: string; spots: string }[]
+  events: { title: string; date: string; city: string; mode: string; spots: string; registrationUrl?: string }[]
   sectionTitle?: string
   sectionDescription?: string
 }
@@ -48,7 +48,12 @@ export function EventsSection({ events, sectionTitle, sectionDescription }: Even
                   <Ticket className="h-4 w-4 text-gold" /> {e.spots}
                 </p>
               </div>
-              <CtaButton href="/events" variant="gold" className="mt-6 w-full">
+              <CtaButton
+                href={e.registrationUrl ?? '/events'}
+                variant="gold"
+                className="mt-6 w-full"
+                {...(e.registrationUrl ? { target: '_blank', rel: 'noreferrer' } : {})}
+              >
                 Reserve Seat
               </CtaButton>
             </div>

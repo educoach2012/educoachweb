@@ -63,7 +63,7 @@ export function SiteHeader({ logoUrl, navItems }: SiteHeaderProps) {
             <Logo imageUrl={logoUrl} />
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <nav className="hidden min-w-0 items-center gap-1 overflow-hidden lg:flex" aria-label="Primary">
             {items.map((item) =>
               item.children && item.children.length > 0 ? (
                 <div
@@ -80,13 +80,13 @@ export function SiteHeader({ logoUrl, navItems }: SiteHeaderProps) {
                     href={item.href}
                     aria-expanded={openMenu === item.title}
                     aria-haspopup="true"
-                    className="flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                    className="flex items-center gap-1 rounded-full px-2.5 py-2 text-xs font-medium text-foreground/80 transition-colors hover:text-foreground xl:px-3.5 xl:text-sm"
                   >
                     {item.title}
                     <ChevronDown className="h-3.5 w-3.5 opacity-60" />
                   </Link>
                   {openMenu === item.title && (
-                    <div className="absolute left-1/2 top-full w-[28rem] -translate-x-1/2 xl:w-[34rem] pt-3">
+                    <div className="absolute left-1/2 top-full w-[24rem] -translate-x-1/2 xl:w-[34rem] pt-3">
                       <div className="grid grid-cols-2 gap-1 rounded-3xl border border-border bg-card p-3 shadow-2xl shadow-primary/10">
                         {item.children.map((child) => (
                           <Link
@@ -113,7 +113,7 @@ export function SiteHeader({ logoUrl, navItems }: SiteHeaderProps) {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="rounded-full px-3.5 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                  className="rounded-full px-2.5 py-2 text-xs font-medium text-foreground/80 transition-colors hover:text-foreground xl:px-3.5 xl:text-sm"
                 >
                   {item.title}
                 </Link>
@@ -130,7 +130,7 @@ export function SiteHeader({ logoUrl, navItems }: SiteHeaderProps) {
               <Search className="h-[18px] w-[18px]" />
             </Link>
             <ThemeToggle className="hidden sm:inline-flex" />
-            <CtaButton href="/book-assessment" variant="gold" className="hidden md:inline-flex">
+            <CtaButton href="/book-assessment" variant="gold" className="hidden lg:inline-flex">
               Book Assessment
             </CtaButton>
             <button

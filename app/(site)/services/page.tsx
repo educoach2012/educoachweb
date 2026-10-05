@@ -7,6 +7,7 @@ import { CtaButton } from '@/components/cta-button'
 import { CTABand } from '@/components/cta-band'
 import { getServices, getPageContent } from '@/lib/data'
 import { Check } from 'lucide-react'
+import { RichText } from '@/components/rich-text'
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageContent('services')
@@ -28,6 +29,7 @@ export default async function ServicesPage() {
         eyebrow={page?.heroEyebrow ?? 'Services'}
         title={page?.heroTitle ?? 'One partner for the entire journey'}
         description={page?.heroDescription ?? "Every service is designed to move you closer to the right offer — and a future you're excited about."}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Services' }]}
       />
 
@@ -55,9 +57,13 @@ export default async function ServicesPage() {
                   </CtaButton>
                 </Reveal>
                 <Reveal delay={0.1}>
-                  <p className="text-base leading-relaxed text-muted-foreground">
-                    {s.longDesc}
-                  </p>
+                  {s.richLongDesc && s.richLongDesc.length > 0 ? (
+                    <RichText value={s.richLongDesc} />
+                  ) : (
+                    <p className="text-base leading-relaxed text-muted-foreground">
+                      {s.longDesc}
+                    </p>
+                  )}
                   <ul className="mt-6 space-y-3">
                     {s.features?.map((f) => (
                       <li key={f} className="flex items-start gap-3 text-sm text-foreground">
@@ -75,7 +81,9 @@ export default async function ServicesPage() {
         ))}
       </div>
 
-      <CTABand />
+      {page?.ctaVisible !== false && (
+        <CTABand title={page?.ctaTitle} subtitle={page?.ctaSubtitle} />
+      )}
     </>
   )
 }

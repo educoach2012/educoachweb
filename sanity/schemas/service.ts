@@ -11,7 +11,8 @@ export default defineType({
     defineField({ name: 'serviceId', title: 'Anchor ID', type: 'string', description: 'Used for hash links, e.g. "career" for /services#career' }),
     defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'Lucide icon name, e.g. Compass, Sparkles, GraduationCap' }),
     defineField({ name: 'shortDesc', title: 'Short Description', type: 'text', rows: 2 }),
-    defineField({ name: 'longDesc', title: 'Long Description', type: 'text', rows: 5 }),
+    defineField({ name: 'longDesc', title: 'Long Description (plain)', type: 'text', rows: 5 }),
+    defineField({ name: 'richLongDesc', title: 'Rich Long Description', type: 'richText', description: 'Formatted description — overrides plain text if set' }),
     defineField({
       name: 'features',
       title: 'Features',

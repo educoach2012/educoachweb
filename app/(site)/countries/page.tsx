@@ -27,6 +27,7 @@ export default async function CountriesPage() {
         eyebrow={page?.heroEyebrow ?? 'Study Destinations'}
         title={page?.heroTitle ?? "Choose your country. We'll handle the rest."}
         description={page?.heroDescription ?? 'Deep expertise across every major study-abroad destination and top universities within each.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Countries' }]}
       />
 
@@ -57,10 +58,12 @@ export default async function CountriesPage() {
         </div>
       </section>
 
-      <CTABand
-        title={page?.ctaTitle ?? 'Not sure which country is right for you?'}
-        subtitle={page?.ctaSubtitle ?? "Book a free assessment and we'll help you shortlist the best destinations for your profile."}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? 'Not sure which country is right for you?'}
+          subtitle={page?.ctaSubtitle ?? "Book a free assessment and we'll help you shortlist the best destinations for your profile."}
+        />
+      )}
     </>
   )
 }

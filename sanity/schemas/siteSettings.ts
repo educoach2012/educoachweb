@@ -149,6 +149,7 @@ export default defineType({
             { name: 'title', title: 'Title', type: 'string' },
             { name: 'desc', title: 'Description', type: 'text', rows: 2 },
             { name: 'icon', title: 'Icon Name', type: 'string', description: 'Lucide icon name (e.g. Brain, UserCheck, Sparkles)' },
+            { name: 'href', title: 'Link URL', type: 'string', description: 'Optional — makes the card clickable (e.g. /services or /about)' },
           ],
           preview: {
             select: { title: 'title', subtitle: 'icon' },
@@ -248,7 +249,8 @@ export default defineType({
         defineField({ name: 'initials', title: 'Initials', type: 'string' }),
         defineField({ name: 'heading', title: 'Section Heading', type: 'text', rows: 2 }),
         defineField({ name: 'quote', title: 'Quote', type: 'text', rows: 3 }),
-        defineField({ name: 'bio', title: 'Bio Paragraphs', type: 'array', of: [{ type: 'text' }] }),
+        defineField({ name: 'bio', title: 'Bio Paragraphs (legacy)', type: 'array', of: [{ type: 'text' }] }),
+        defineField({ name: 'richBio', title: 'Rich Bio', type: 'richText', description: 'Formatted bio — overrides plain paragraphs if set' }),
         defineField({ name: 'tags', title: 'Credential Tags', type: 'array', of: [{ type: 'string' }] }),
         defineField({ name: 'photo', title: 'Photo', type: 'image', options: { hotspot: true } }),
       ],

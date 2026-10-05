@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
+import { RichText } from '@/components/rich-text'
 
 type Crumb = { label: string; href?: string }
 
@@ -8,11 +9,13 @@ export function PageHero({
   eyebrow,
   title,
   description,
+  richDescription,
   crumbs = [],
 }: {
   eyebrow?: string
   title: string
   description?: string
+  richDescription?: unknown[]
   crumbs?: Crumb[]
 }) {
   return (
@@ -43,7 +46,7 @@ export function PageHero({
             ))}
           </ol>
         </nav>
-        <Reveal className="max-w-3xl">
+        <Reveal>
           {eyebrow && (
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
@@ -53,11 +56,15 @@ export function PageHero({
           <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.05] sm:text-5xl">
             {title}
           </h1>
-          {description && (
-            <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+          {richDescription && richDescription.length > 0 ? (
+            <div className="mt-5 text-lg leading-relaxed">
+              <RichText value={richDescription} />
+            </div>
+          ) : description ? (
+            <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
               {description}
             </p>
-          )}
+          ) : null}
         </Reveal>
       </div>
     </section>

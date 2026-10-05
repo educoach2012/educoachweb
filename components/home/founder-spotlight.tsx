@@ -1,9 +1,12 @@
 'use client'
 
+import Image from 'next/image'
 import { Reveal } from '@/components/reveal'
 import { CtaButton } from '@/components/cta-button'
 import { Quote } from 'lucide-react'
+import { RichText } from '@/components/rich-text'
 import type { Founder } from '@/lib/types'
+import { urlFor } from '@/sanity/lib/image'
 
 interface FounderSpotlightProps {
   founder?: Founder
@@ -20,6 +23,10 @@ export function FounderSpotlight({ founder }: FounderSpotlightProps) {
     tags: [],
   }
 
+  const photoUrl = f.photo?.asset?._ref
+    ? urlFor(f.photo).width(600).height(800).url()
+    : null
+
   return (
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4">
@@ -27,11 +34,21 @@ export function FounderSpotlight({ founder }: FounderSpotlightProps) {
           <Reveal>
             <div className="mx-auto w-full max-w-xs lg:max-w-none">
               <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
-                <div className="flex aspect-[3/4] items-center justify-center bg-gradient-to-br from-primary/20 to-navy/30">
-                  <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-navy font-display text-5xl font-bold text-primary-foreground">
-                    {f.initials}
+                {photoUrl ? (
+                  <Image
+                    src={photoUrl}
+                    alt={f.name}
+                    width={600}
+                    height={800}
+                    className="aspect-[3/4] w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex aspect-[3/4] items-center justify-center bg-gradient-to-br from-primary/20 to-navy/30">
+                    <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-navy font-display text-5xl font-bold text-primary-foreground">
+                      {f.initials}
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-card via-card/90 to-transparent p-6 pt-16">
                   <p className="font-display text-lg font-bold text-foreground">{f.name}</p>
                   <p className="text-sm text-primary">{f.role}</p>
@@ -58,13 +75,17 @@ export function FounderSpotlight({ founder }: FounderSpotlightProps) {
                 </blockquote>
               </div>
 
-              {f.bio.length > 0 && (
+              {f.richBio && f.richBio.length > 0 ? (
+                <div className="mt-8">
+                  <RichText value={f.richBio} />
+                </div>
+              ) : f.bio.length > 0 ? (
                 <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
                   {f.bio.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
-              )}
+              ) : null}
 
               {f.tags.length > 0 && (
                 <div className="mt-6 flex flex-wrap gap-3">

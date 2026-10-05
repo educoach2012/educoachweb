@@ -8,12 +8,13 @@ export const countriesQuery = groq`*[_type == "country"] | order(order asc) {
 
 export const countryBySlugQuery = groq`*[_type == "country" && slug.current == $slug][0] {
   _id, name, "slug": slug.current, flag, tagline, universityCount,
-  overview, whyStudyHere, topUniversities, intakes, averageCost, visaInfo,
+  overview, richOverview, whyStudyHere, topUniversities, intakes, averageCost,
+  visaInfo, richVisaInfo,
   seoTitle, seoDescription
 }`
 
 export const servicesQuery = groq`*[_type == "service"] | order(order asc) {
-  _id, title, serviceId, icon, shortDesc, longDesc, features, order
+  _id, title, serviceId, icon, shortDesc, longDesc, richLongDesc, features, order
 }`
 
 export const blogsQuery = groq`*[_type == "blog"] | order(publishedDate desc) {
@@ -33,7 +34,8 @@ export const successStoriesQuery = groq`*[_type == "successStory"] | order(year 
 }`
 
 export const teamMembersQuery = groq`*[_type == "teamMember"] | order(order asc) {
-  _id, name, role, experience, specialisation, countries, bio, photo, linkedin, order
+  _id, name, role, experience, specialisation, countries, bio,
+  photo, secondaryPhoto, linkedin, twitter, instagram, order
 }`
 
 export const eventsQuery = groq`*[_type == "event"] | order(date desc) {
@@ -59,14 +61,15 @@ export const stepsQuery = groq`*[_type == "step"] | order(order asc) {
 
 export const storiesByCountryQuery = groq`*[_type == "successStory" && country->slug.current == $slug] | order(year desc) {
   _id, name, university, "countryName": coalesce(country->name, countryName),
-  course, scholarship, year, quote
+  course, scholarship, year, quote, photo
 }`
 
 export const caseStudiesQuery = groq`*[_type == "caseStudy"] | order(order asc) {
   _id, title, "slug": slug.current, studentName, university,
   "countryName": coalesce(country->name, ""),
   course, level, scholarshipValue, year,
-  challenge, approach, outcome, quote, photo, featured
+  challenge, richChallenge, approach, richApproach, outcome, richOutcome,
+  quote, photo, featured
 }`
 
 export const pageContentBySlugQuery = groq`*[_type == "pageContent" && slug == $slug][0]`

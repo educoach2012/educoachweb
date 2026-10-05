@@ -7,6 +7,7 @@ import { CtaButton } from '@/components/cta-button'
 import { getCaseStudies, getPageContent } from '@/lib/data'
 import { section } from '@/lib/utils'
 import { GraduationCap, Quote } from 'lucide-react'
+import { RichText } from '@/components/rich-text'
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageContent('case-studies')
@@ -29,6 +30,7 @@ export default async function CaseStudiesPage() {
         eyebrow={page?.heroEyebrow ?? 'Case Studies'}
         title={page?.heroTitle ?? 'Real students, real outcomes'}
         description={page?.heroDescription ?? "Every student's journey is different. These detailed case studies show how we helped — from the challenge they faced to the offer they accepted."}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Case Studies' }]}
       />
 
@@ -59,15 +61,27 @@ export default async function CaseStudiesPage() {
                   <div className="p-8 space-y-6">
                     <div>
                       <h3 className="text-sm font-semibold uppercase tracking-wider text-destructive">The Challenge</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cs.challenge}</p>
+                      {cs.richChallenge && cs.richChallenge.length > 0 ? (
+                        <div className="mt-2 text-sm"><RichText value={cs.richChallenge} /></div>
+                      ) : (
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cs.challenge}</p>
+                      )}
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold uppercase tracking-wider text-primary">Our Approach</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cs.approach}</p>
+                      {cs.richApproach && cs.richApproach.length > 0 ? (
+                        <div className="mt-2 text-sm"><RichText value={cs.richApproach} /></div>
+                      ) : (
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cs.approach}</p>
+                      )}
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold uppercase tracking-wider text-green-600 dark:text-green-400">The Outcome</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cs.outcome}</p>
+                      {cs.richOutcome && cs.richOutcome.length > 0 ? (
+                        <div className="mt-2 text-sm"><RichText value={cs.richOutcome} /></div>
+                      ) : (
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{cs.outcome}</p>
+                      )}
                     </div>
                     {cs.quote && (
                       <blockquote className="flex items-start gap-3 border-l-2 border-gold pl-4">
@@ -102,7 +116,9 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      <CTABand />
+      {page?.ctaVisible !== false && (
+        <CTABand title={page?.ctaTitle} subtitle={page?.ctaSubtitle} />
+      )}
     </>
   )
 }

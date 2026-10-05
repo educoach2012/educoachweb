@@ -38,6 +38,7 @@ export default async function BookAssessmentPage() {
         eyebrow={page?.heroEyebrow ?? 'Free Assessment'}
         title={page?.heroTitle ?? "Let's map your journey abroad"}
         description={page?.heroDescription ?? "Tell us a little about your goals and we'll build a personalised study-abroad roadmap — completely free."}
+        richDescription={page?.heroRichDescription}
       />
 
       {iframeUrl ? (

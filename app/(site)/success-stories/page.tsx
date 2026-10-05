@@ -24,6 +24,7 @@ export default async function SuccessStoriesPage() {
         eyebrow={page?.heroEyebrow ?? 'Success Stories'}
         title={page?.heroTitle ?? 'Real students. Life-changing offers.'}
         description={page?.heroDescription ?? 'Behind every offer is a story of the right guidance at the right time.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Success Stories' }]}
       />
 
@@ -33,10 +34,12 @@ export default async function SuccessStoriesPage() {
         </div>
       </section>
 
-      <CTABand
-        title={page?.ctaTitle ?? 'Your story could be next'}
-        subtitle={page?.ctaSubtitle ?? 'Book a free assessment and start your journey to a world-class university.'}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? 'Your story could be next'}
+          subtitle={page?.ctaSubtitle ?? 'Book a free assessment and start your journey to a world-class university.'}
+        />
+      )}
     </>
   )
 }

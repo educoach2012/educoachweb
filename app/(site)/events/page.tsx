@@ -59,6 +59,7 @@ export default async function EventsPage() {
         eyebrow={page?.heroEyebrow ?? 'Events'}
         title={page?.heroTitle ?? 'Free masterclasses & workshops'}
         description={page?.heroDescription ?? 'Join our live sessions on admissions, scholarships and country-specific strategies. All sessions are free.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Events' }]}
       />
 
@@ -144,10 +145,12 @@ export default async function EventsPage() {
         </section>
       )}
 
-      <CTABand
-        title={page?.ctaTitle ?? "Can't attend an event? Book a 1-on-1 instead."}
-        subtitle={page?.ctaSubtitle ?? 'Get personalised guidance from a senior counsellor — at a time that suits you.'}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? "Can't attend an event? Book a 1-on-1 instead."}
+          subtitle={page?.ctaSubtitle ?? 'Get personalised guidance from a senior counsellor — at a time that suits you.'}
+        />
+      )}
     </>
   )
 }

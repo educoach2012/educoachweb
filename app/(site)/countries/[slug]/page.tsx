@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { GraduationCap, Calendar, DollarSign, FileText } from 'lucide-react'
 import { PageHero } from '@/components/page-hero'
+import { RichText } from '@/components/rich-text'
 import { SectionHeading } from '@/components/section-heading'
 import { Reveal, RevealStagger, RevealItem } from '@/components/reveal'
 import { CtaButton } from '@/components/cta-button'
@@ -50,7 +51,11 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
             <div>
               <Reveal>
                 <h2 className="font-heading text-2xl font-bold text-foreground md:text-3xl">Overview</h2>
-                <p className="mt-4 leading-relaxed text-muted-foreground">{country.overview}</p>
+                {country.richOverview && country.richOverview.length > 0 ? (
+                  <div className="mt-4"><RichText value={country.richOverview} /></div>
+                ) : (
+                  <p className="mt-4 leading-relaxed text-muted-foreground">{country.overview}</p>
+                )}
               </Reveal>
 
               {/* Why study here */}
@@ -98,7 +103,11 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
               {/* Visa info */}
               <Reveal delay={0.2}>
                 <h3 className="mt-12 font-heading text-xl font-bold text-foreground">Visa information</h3>
-                <p className="mt-4 leading-relaxed text-muted-foreground">{country.visaInfo}</p>
+                {country.richVisaInfo && country.richVisaInfo.length > 0 ? (
+                  <div className="mt-4"><RichText value={country.richVisaInfo} /></div>
+                ) : (
+                  <p className="mt-4 leading-relaxed text-muted-foreground">{country.visaInfo}</p>
+                )}
               </Reveal>
             </div>
 

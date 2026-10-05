@@ -33,6 +33,7 @@ export default async function ResourcesPage() {
         eyebrow={page?.heroEyebrow ?? 'Resources'}
         title={page?.heroTitle ?? 'Free guides, checklists & tools'}
         description={page?.heroDescription ?? 'Everything you need to plan your study-abroad journey — created by our counsellors and available for free.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Resources' }]}
       />
 
@@ -63,10 +64,12 @@ export default async function ResourcesPage() {
         </div>
       </section>
 
-      <CTABand
-        title={page?.ctaTitle ?? 'Need personalised guidance?'}
-        subtitle={page?.ctaSubtitle ?? 'Our resources are a great starting point — but a 1-on-1 session takes it further.'}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? 'Need personalised guidance?'}
+          subtitle={page?.ctaSubtitle ?? 'Our resources are a great starting point — but a 1-on-1 session takes it further.'}
+        />
+      )}
     </>
   )
 }

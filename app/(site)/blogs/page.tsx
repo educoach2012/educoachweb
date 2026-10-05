@@ -24,6 +24,7 @@ export default async function BlogsPage() {
         eyebrow={page?.heroEyebrow ?? 'Blog'}
         title={page?.heroTitle ?? 'Insights for the study-abroad journey'}
         description={page?.heroDescription ?? 'Expert advice on admissions, scholarships, test prep and country-specific strategies.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Blog' }]}
       />
 
@@ -33,7 +34,9 @@ export default async function BlogsPage() {
         </div>
       </section>
 
-      <CTABand />
+      {page?.ctaVisible !== false && (
+        <CTABand title={page?.ctaTitle} subtitle={page?.ctaSubtitle} />
+      )}
     </>
   )
 }

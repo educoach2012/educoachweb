@@ -12,7 +12,8 @@ export default defineType({
     defineField({ name: 'metaDescription', title: 'Meta Description', type: 'text', rows: 2 }),
     defineField({ name: 'heroEyebrow', title: 'Hero Eyebrow', type: 'string' }),
     defineField({ name: 'heroTitle', title: 'Hero Title', type: 'string' }),
-    defineField({ name: 'heroDescription', title: 'Hero Description', type: 'text', rows: 3 }),
+    defineField({ name: 'heroDescription', title: 'Hero Description (plain)', type: 'text', rows: 3, description: 'Plain text fallback — use Hero Rich Description for formatting' }),
+    defineField({ name: 'heroRichDescription', title: 'Hero Rich Description', type: 'richText', description: 'Supports bold, italic, links, bullets. Overrides plain hero description if set.' }),
     defineField({
       name: 'sections',
       title: 'Section Headings',
@@ -30,6 +31,7 @@ export default defineType({
     }),
     defineField({ name: 'ctaTitle', title: 'CTA Title', type: 'string' }),
     defineField({ name: 'ctaSubtitle', title: 'CTA Subtitle', type: 'text', rows: 2 }),
+    defineField({ name: 'ctaVisible', title: 'Show CTA Band', type: 'boolean', initialValue: true, description: 'Toggle the CTA section at the bottom of this page' }),
     defineField({
       name: 'items',
       title: 'Content Items',
@@ -77,10 +79,16 @@ export default defineType({
     }),
     defineField({
       name: 'contentParagraphs',
-      title: 'Content Paragraphs',
-      description: 'Arbitrary text paragraphs for page body content',
+      title: 'Content Paragraphs (legacy)',
+      description: 'Plain text paragraphs — use Rich Body instead for new content',
       type: 'array',
       of: [{ type: 'text' }],
+    }),
+    defineField({
+      name: 'richBody',
+      title: 'Rich Body Content',
+      description: 'Full rich text content with formatting, images, and links',
+      type: 'richText',
     }),
   ],
   preview: {

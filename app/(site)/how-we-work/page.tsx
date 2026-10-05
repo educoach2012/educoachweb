@@ -29,6 +29,7 @@ export default async function HowWeWorkPage() {
         eyebrow={page?.heroEyebrow ?? 'How We Work'}
         title={page?.heroTitle ?? 'A clear, guided journey to your dream offer'}
         description={page?.heroDescription ?? 'Eight considered steps. One dedicated counsellor. Zero guesswork.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'How We Work' }]}
       />
 
@@ -93,10 +94,12 @@ export default async function HowWeWorkPage() {
         </div>
       </section>
 
-      <CTABand
-        title={page?.ctaTitle ?? 'Ready to start step one?'}
-        subtitle={page?.ctaSubtitle ?? "Book a free assessment and we'll map your personalised journey."}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? 'Ready to start step one?'}
+          subtitle={page?.ctaSubtitle ?? "Book a free assessment and we'll map your personalised journey."}
+        />
+      )}
     </>
   )
 }

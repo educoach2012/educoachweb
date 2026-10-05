@@ -27,7 +27,7 @@ export type SiteSettings = {
   iconLogo?: SanityImageRef
   logo?: SanityImageRef
   logoDark?: SanityImageRef
-  whyCards?: { title: string; desc: string; icon: string }[]
+  whyCards?: { title: string; desc: string; icon: string; href?: string }[]
   heroBadge?: string
   heroHeadingLines?: string[]
   heroSubtitle?: string
@@ -64,11 +64,13 @@ export type CountryDetail = Country & {
   seoTitle?: string | null
   seoDescription?: string | null
   overview?: string
+  richOverview?: unknown[]
   whyStudyHere?: string[]
   topUniversities?: { name: string; ranking: string; city: string }[]
   intakes?: string
   averageCost?: string
   visaInfo?: string
+  richVisaInfo?: unknown[]
   workRights?: string
   popularCourses?: string[]
 }
@@ -79,6 +81,7 @@ export type Service = {
   title: string
   shortDesc: string
   longDesc?: string
+  richLongDesc?: unknown[]
   features?: string[]
   order?: number
 }
@@ -89,14 +92,15 @@ export type Blog = {
   category: string
   readingTime: number
   publishedDate?: string
+  heroImage?: SanityImageRef
+  featured?: boolean
 }
 
 export type BlogDetail = Blog & {
   seoTitle?: string | null
   seoDescription?: string | null
   body: unknown[]
-  author: { name: string; role: string } | null
-  heroImage?: string
+  author: { name: string; role: string; photo?: SanityImageRef } | null
   publishedDate?: string
 }
 
@@ -108,6 +112,8 @@ export type SuccessStory = {
   scholarship: string
   year: number
   quote: string
+  photo?: SanityImageRef
+  featured?: boolean
 }
 
 export type TeamMember = {
@@ -117,6 +123,11 @@ export type TeamMember = {
   specialisation: string
   countries: string
   bio?: string
+  photo?: SanityImageRef
+  secondaryPhoto?: SanityImageRef
+  linkedin?: string
+  twitter?: string
+  instagram?: string
   order?: number
 }
 
@@ -126,6 +137,9 @@ export type Event = {
   city: string
   mode: string
   spots: string
+  description?: unknown[]
+  registrationUrl?: string
+  featured?: boolean
 }
 
 export type University = {
@@ -134,6 +148,8 @@ export type University = {
   ranking: string
   type: string
   city: string
+  website?: string
+  logo?: SanityImageRef
 }
 
 export type Faq = {
@@ -166,8 +182,11 @@ export type CaseStudy = {
   scholarshipValue?: string
   year: number
   challenge: string
+  richChallenge?: unknown[]
   approach: string
+  richApproach?: unknown[]
   outcome: string
+  richOutcome?: unknown[]
   quote?: string
   photo?: SanityImageRef
   featured?: boolean
@@ -187,9 +206,11 @@ export type PageContent = {
   heroEyebrow?: string
   heroTitle?: string
   heroDescription?: string
+  heroRichDescription?: unknown[]
   sections?: SectionContent[]
   ctaTitle?: string
   ctaSubtitle?: string
+  ctaVisible?: boolean
   items?: { icon?: string; title: string; desc: string; detail?: string }[]
   listItems?: string[]
   listItems2?: string[]
@@ -197,6 +218,7 @@ export type PageContent = {
   listTitle2?: string
   perks?: { title: string; desc: string }[]
   contentParagraphs?: string[]
+  richBody?: unknown[]
 }
 
 export type Programme = {
@@ -225,7 +247,9 @@ export type Founder = {
   heading: string
   quote: string
   bio: string[]
+  richBio?: unknown[]
   tags: string[]
+  photo?: SanityImageRef
 }
 
 export type Milestone = {

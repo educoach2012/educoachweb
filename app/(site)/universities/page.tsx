@@ -24,6 +24,7 @@ export default async function UniversitiesPage() {
         eyebrow={page?.heroEyebrow ?? 'Partner Universities'}
         title={page?.heroTitle ?? 'World-class universities, one trusted guide'}
         description={page?.heroDescription ?? 'We work with 150+ universities across 30+ countries. Here are some of our key partners.'}
+        richDescription={page?.heroRichDescription}
         crumbs={[{ label: 'Universities' }]}
       />
 
@@ -33,10 +34,12 @@ export default async function UniversitiesPage() {
         </div>
       </section>
 
-      <CTABand
-        title={page?.ctaTitle ?? 'Looking for a specific university?'}
-        subtitle={page?.ctaSubtitle ?? 'Our counsellors have relationships with 150+ universities worldwide. Book a session to get matched.'}
-      />
+      {page?.ctaVisible !== false && (
+        <CTABand
+          title={page?.ctaTitle ?? 'Looking for a specific university?'}
+          subtitle={page?.ctaSubtitle ?? 'Our counsellors have relationships with 150+ universities worldwide. Book a session to get matched.'}
+        />
+      )}
     </>
   )
 }

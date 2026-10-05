@@ -13,8 +13,10 @@ import caseStudy from './caseStudy'
 import acceptance from './acceptance'
 import programme from './programme'
 import pageContent from './pageContent'
+import richText from './richText'
 
 export const schemaTypes = [
+  richText,
   siteSettings,
   country,
   service,

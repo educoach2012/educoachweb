@@ -34,6 +34,7 @@ export default async function ContactPage() {
         eyebrow={page?.heroEyebrow ?? 'Contact'}
         title={page?.heroTitle ?? "We'd love to hear from you"}
         description={page?.heroDescription ?? 'Have a question about studying abroad? Reach out through any channel — we typically reply within one business day.'}
+        richDescription={page?.heroRichDescription}
       />
       <section className="py-16 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-[1fr_1.2fr]">
