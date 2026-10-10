@@ -51,7 +51,7 @@ export default async function DynamicPage({ params }: Props) {
         title={page.heroTitle ?? ''}
         description={page.heroDescription}
         richDescription={page.heroRichDescription}
-        crumbs={[{ label: 'Home', href: '/' }, { label: page.heroTitle ?? slug }]}
+        crumbs={[{ label: page.heroTitle ?? slug }]}
       />
 
       <DynamicLayout layout={page.layout} items={items} page={page} />
